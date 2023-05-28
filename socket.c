@@ -106,8 +106,8 @@ if ( listen( server, SOMAXCONN ) < 0 ) {
         exit(1);
 }
 
-printf("Concurrent  socket server now starting on port %d\n",PORT);
-printf("Wait for connection\n");
+printf("File server now listening on port %d\n",PORT);
+
 
 while(1) {  // main accept() loop
     length = sizeof remote_addr;
