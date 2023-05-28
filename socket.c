@@ -18,7 +18,7 @@ void list_files(int client_fd, const char* path) {
     struct stat file_stat;
     char buffer[DEFAULT_BUFLEN];
 
-    dir = opendir(directory);
+    dir = opendir(path);
     if (dir == NULL) {
         perror("Failed to open directory");
         return;
@@ -26,7 +26,7 @@ void list_files(int client_fd, const char* path) {
 
     while ((entry = readdir(dir)) != NULL) {
         char file_path[DEFAULT_BUFLEN];
-        sprintf(file_path, "%s/%s", directory, entry->d_name);
+        sprintf(file_path, "%s/%s", path, entry->d_name);
 
         if (stat(file_path, &file_stat) < 0)
             continue;
