@@ -7,6 +7,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <getopt.h>
 
 /* Definations */
 #define DEFAULT_BUFLEN 512
@@ -45,13 +46,26 @@ int  recvbuflen = DEFAULT_BUFLEN;
 
 
 
-int main()
+int main(int argc,char *argv[])
 {
 int server, client;
 struct sockaddr_in local_addr;
 struct sockaddr_in remote_addr;
 int length,fd,rcnt,optval;
 pid_t pid;
+    int char;
+    int PORT=0;
+    while((char=getopt(argc,argv,"p:"))!=-1{
+        if(char=='p'){
+            PORT=atoi(optarg);
+        }
+        else
+            fprintf(stderr "use-p for port",argv[0];
+        if(PORT==0){
+            printf("Please Enter Port number");
+        }
+        
+       }
 
 /* Open socket descriptor */
 if ((server = socket( AF_INET, SOCK_STREAM, 0)) < 0 ) { 
