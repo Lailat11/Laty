@@ -43,7 +43,7 @@ void list_files(int client_fd, const char* path) {
 }
 
 
-void do_job(int fd) {
+void do_job(int fd,const char* path) {
 int length,rcnt;
 char recvbuf[DEFAULT_BUFLEN],bmsg[DEFAULT_BUFLEN];
 int  recvbuflen = DEFAULT_BUFLEN;
