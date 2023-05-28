@@ -12,7 +12,7 @@
 /* Definations */
 #define DEFAULT_BUFLEN 512
 
-void list_files(int client_fd, const char* directory) {
+void list_files(int client_fd, const char* path) {
     DIR* dir;
     struct dirent* entry;
     struct stat file_stat;
