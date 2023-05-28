@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include<dirent.h>
 
 /* Socket API headers */
 #include <sys/socket.h>
