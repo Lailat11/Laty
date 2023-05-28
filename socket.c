@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include<dirent.h>
+#include<sys/stat.h>
 
 /* Socket API headers */
 #include <sys/socket.h>
