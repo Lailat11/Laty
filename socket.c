@@ -56,7 +56,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
         rcnt = recv(fd, recvbuf, recvbuflen, 0);
         if (rcnt > 0) {
             printf("Bytes received: %d\n", rcnt);
-            if (strncmp(recvbuf, "LIST",4) == 0) {
+            if (strncmp(recvbuf,"LIST",4) == 0) {
                 list_files(fd, path);
             } else {
                 printf("Invalid command: %s\n", recvbuf);
