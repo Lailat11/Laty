@@ -47,7 +47,7 @@ void do_job(int fd) {
 int length,rcnt;
 char recvbuf[DEFAULT_BUFLEN],bmsg[DEFAULT_BUFLEN];
 int  recvbuflen = DEFAULT_BUFLEN;
-    char a[]="Welcome to Lailat's server";
+    char a[]="Welcome to Lailat's server\n";
     send(fd,a,strlen(a),0);
 
     // Receive until the peer shuts down the connection
