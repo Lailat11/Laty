@@ -11,7 +11,7 @@
 
 /* Definations */
 #define DEFAULT_BUFLEN 512
-#define PORT 1462
+
 
 void do_job(int fd) {
 int length,rcnt;
@@ -56,16 +56,23 @@ pid_t pid;
     int character;
     int PORT=0;
     while((character=getopt(argc,argv,"p:"))!=-1{
-        if(char=='p'){
-            PORT=atoi(optarg);
-        }
-        else
-            fprintf(stderr "use-p for port",argv[0];
-        if(PORT==0){
-            printf("Please Enter Port number");
-        }
+      switch(character){
+          case 'p':
+              PORT=atoi(optarg);
+              break;
+          default:
+              fprintf(stderr,"Please Enter port number using -p",argv[0]);
+              return 1;
+      }
+        
         
        }
+          if(PORT==0){
+              printf("Please Enter port number using -p\n");
+          return 1;
+              
+          }
+          
 
 /* Open socket descriptor */
 if ((server = socket( AF_INET, SOCK_STREAM, 0)) < 0 ) { 
