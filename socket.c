@@ -1,9 +1,3 @@
-/*
-  This code represent basic Concurrent Echo Server for linux platform. It's used to teach how basic server  running.
-For compile code : # gcc concurrent.c -o concurrent
-  -----------------------Copyright Devrim Seral---------------------------------
-*/
-/* C header files */
 #include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
