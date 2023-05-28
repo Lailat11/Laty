@@ -53,9 +53,9 @@ struct sockaddr_in local_addr;
 struct sockaddr_in remote_addr;
 int length,fd,rcnt,optval;
 pid_t pid;
-    int char;
+    int character;
     int PORT=0;
-    while((char=getopt(argc,argv,"p:"))!=-1{
+    while((character=getopt(argc,argv,"p:"))!=-1{
         if(char=='p'){
             PORT=atoi(optarg);
         }
