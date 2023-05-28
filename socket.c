@@ -27,7 +27,7 @@ void list_files(int client_fd, const char* path) {
 
     while ((entry = readdir(dir)) != NULL) {
         char file_path[DEFAULT_BUFLEN];
-        sprintf(file_path, "%s/%s", path, entry->d_name);
+        sprintf(file_path,DEFAULT_BUFLEN,"%s/%s", path, entry->d_name);
 
         if (stat(file_path, &file_stat) < 0)
             continue;
@@ -55,7 +55,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
         rcnt = recv(fd, recvbuf, recvbuflen, 0);
         if (rcnt > 0) {
             printf("Bytes received: %d\n", rcnt);
-            if (strcmp(recvbuf, "LIST") == 0) {
+            if (strncmp(recvbuf, "LIST",4) == 0) {
                 list_files(fd, path);
             } else {
                 printf("Invalid command: %s\n", recvbuf);
