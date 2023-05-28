@@ -29,7 +29,7 @@ void list_files(int client_fd, const char* path) {
 
     while ((entry = readdir(dir)) != NULL) {
         char file_path[DEFAULT_BUFLEN];
-        sprintf(file_path,DEFAULT_BUFLEN,"%s/%s", path, entry->d_name);
+        snprintf(file_path,DEFAULT_BUFLEN,"%s/%s", path, entry->d_name);
 
         if (stat(file_path, &file_stat) < 0)
             continue;
