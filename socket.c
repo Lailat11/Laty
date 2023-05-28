@@ -10,6 +10,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <getopt.h>
+#include <unistd.h>
 
 /* Definations */
 #define DEFAULT_BUFLEN 512
