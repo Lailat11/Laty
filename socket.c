@@ -55,7 +55,7 @@ int length,fd,rcnt,optval;
 pid_t pid;
     int character;
     int PORT=0;
-    while((character=getopt(argc,argv,"p:"))!=-1{
+    while((character=getopt(argc,argv,"p:"))!=-1){
       switch(character){
           case 'p':
               PORT=atoi(optarg);
