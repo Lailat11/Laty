@@ -12,6 +12,35 @@
 /* Definations */
 #define DEFAULT_BUFLEN 512
 
+void list_files(int client_fd, const char* directory) {
+    DIR* dir;
+    struct dirent* entry;
+    struct stat file_stat;
+    char buffer[DEFAULT_BUFLEN];
+
+    dir = opendir(directory);
+    if (dir == NULL) {
+        perror("Failed to open directory");
+        return;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        char file_path[DEFAULT_BUFLEN];
+        sprintf(file_path, "%s/%s", directory, entry->d_name);
+
+        if (stat(file_path, &file_stat) < 0)
+            continue;
+
+        if (S_ISDIR(file_stat.st_mode))
+            continue;
+
+        snprintf(buffer, DEFAULT_BUFLEN, "File: %s, Size: %ld bytes\n", entry->d_name, file_stat.st_size);
+        send(client_fd, buffer, strlen(buffer), 0);
+    }
+
+    closedir(dir);
+}
+
 
 void do_job(int fd) {
 int length,rcnt;
@@ -25,15 +54,13 @@ int  recvbuflen = DEFAULT_BUFLEN;
         rcnt = recv(fd, recvbuf, recvbuflen, 0);
         if (rcnt > 0) {
             printf("Bytes received: %d\n", rcnt);
-
-        // Echo the buffer back to the sender
-        rcnt = send( fd, recvbuf, rcnt, 0 );
-            if (rcnt < 0) {
-                printf("Send failed:\n");
-                close(fd);
-                break;
+            if (strcmp(recvbuf, "LIST") == 0) {
+                list_files(fd, path);
+            } else {
+                printf("Invalid command: %s\n", recvbuf);
             }
-            printf("Bytes sent: %d\n", rcnt);
+
+      
 
         }
         else if (rcnt == 0)
@@ -57,8 +84,12 @@ int length,fd,rcnt,optval;
 pid_t pid;
     int character;
     int PORT=0;
-    while((character=getopt(argc,argv,"p:"))!=-1){
+    char *path=NULL;
+    while((character=getopt(argc,argv,"d:p:"))!=-1){
       switch(character){
+          case 'd':
+              path=optarg;
+              break;
           case 'p':
               PORT=atoi(optarg);
               break;
@@ -69,8 +100,8 @@ pid_t pid;
         
         
        }
-          if(PORT==0){
-              printf("Please Enter port number using -p\n");
+          if(path==NULL||PORT==0){
+              printf("Please Enter arguements using -d and -p \n");
           return 1;
               
           }
