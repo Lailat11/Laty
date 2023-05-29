@@ -64,7 +64,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
             {
                 printf("You closed the server\n");
                 printf("....Goodbye....");
-                closed(fd);
+                close(fd);
             }else {
                 printf("Invalid command: %s\n", recvbuf);
             }
