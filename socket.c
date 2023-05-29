@@ -69,13 +69,13 @@ int  recvbuflen = DEFAULT_BUFLEN;
     if (file == NULL) {
         char error_message[DEFAULT_BUFLEN];
         snprintf(error_message, DEFAULT_BUFLEN, "File not found: %s\n", filename);
-        send(client_fd, error_message, strlen(error_message), 0);
+        send(fd, error_message, strlen(error_message), 0);
     } else {
        
         char buffer[DEFAULT_BUFLEN];
         size_t bytes_read;
         while ((bytes_read = fread(buffer, 1, DEFAULT_BUFLEN, file)) > 0) {
-            send(client_fd, buffer, bytes_read, 0);
+            send(fd, buffer, bytes_read, 0);
         }
 
         fclose(file);
