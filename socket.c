@@ -44,17 +44,16 @@ void list_files(int client_fd, const char* path) {
     closedir(dir);
 }
 
-
 void do_job(int fd,const char* path) {
 int length,rcnt;
-char recvbuf[DEFAULT_BUFLEN],bmsg[DEFAULT_BUFLEN];
-int  recvbuflen = DEFAULT_BUFLEN;
+char recvbuf[DEFAULT_BUFLEN];
+
     char a[]="Welcome to Lailat's server\n";
     send(fd,a,strlen(a),0);
 
     // Receive until the peer shuts down the connection
     do {
-        rcnt = recv(fd, recvbuf, recvbuflen, 0);
+        rcnt = recv(fd, recvbuf, sizeof(recvbuf), 0);
         if (rcnt > 0) {
             printf("Bytes received: %d\n", rcnt);
             if (strncmp(recvbuf,"LIST",4) == 0) {
@@ -64,8 +63,9 @@ int  recvbuflen = DEFAULT_BUFLEN;
    
     char filename[DEFAULT_BUFLEN];
     sscanf(recvbuf, "GET %s", filename);
-
-    FILE* file = fopen(filename, "rb");
+                 char file_path[DEFAULT_BUFLEN];
+                snprintf(file_path, DEFAULT_BUFLEN, "%s/%s", path, filename);
+    FILE* file = fopen(file_path, "rb");
     if (file == NULL) {
         char error_message[DEFAULT_BUFLEN];
         snprintf(error_message, DEFAULT_BUFLEN, "File not found: %s\n", filename);
@@ -105,7 +105,6 @@ int  recvbuflen = DEFAULT_BUFLEN;
         }
     } while (rcnt > 0);
 }
-
 
 
 int main(int argc,char *argv[])
@@ -190,7 +189,7 @@ while(1) {  // main accept() loop
     if ((pid=fork()) == 0) {
         close(server);
         do_job(fd,path);
-        printf("Child finished their job!\n");
+        printf("Disconnected!\n");
         close(fd);
         exit(0);
     }
