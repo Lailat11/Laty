@@ -99,7 +99,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
             close(fd);
             break;
         }
-    } while (rcnt > 0);
+    } 
 }
 
 
