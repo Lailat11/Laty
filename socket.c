@@ -67,7 +67,24 @@ int  recvbuflen = DEFAULT_BUFLEN;
                 char reply[]="....Goodbye....\n";
                   send(fd,reply,strlen(reply),0);
                 close(fd);
-            }else {
+            }
+            else if (strncmp(recvbuf, "GET", 3) == 0) {
+                
+                char* filename = strtok(recvbuf + 3, " ");
+                if (filename != NULL) {
+                    char filepath[DEFAULT_BUFLEN];
+                    snprintf(filepath, DEFAULT_BUFLEN, "%s/%s", path, filename);
+
+                    FILE* file = fopen(filepath, "r");
+                    if (file == NULL) {
+                        write(fd, "Failed to open file.\n", strlen("Failed to open file.\n"));
+                    } else {
+                        char fileContents[DEFAULT_BUFLEN];
+                        while (fgets(fileContents, DEFAULT_BUFLEN, file)) {
+                            write(fd, fileContents, strlen(fileContents));
+                        }
+                        fclose(file);
+                    }else {
                 printf("Invalid command: %s\n", recvbuf);
             }
 
