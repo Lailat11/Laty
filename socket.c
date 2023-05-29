@@ -62,8 +62,10 @@ int  recvbuflen = DEFAULT_BUFLEN;
             }
             else if(strncmp(recvbuf,"QUIT",4)==0)
             {
-                printf("You closed the server\n");
-                printf("....Goodbye....");
+                char message[]="You closed the server\n";
+                send(fd,message,strlen(d),0);
+                char reply[]="....Goodbye....\n";
+                  send(fd,reply,strlen(d),0);
                 close(fd);
             }else {
                 printf("Invalid command: %s\n", recvbuf);
