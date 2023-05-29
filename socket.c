@@ -84,6 +84,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
                             write(fd, fileContents, strlen(fileContents));
                         }
                         fclose(file);
+                    }
                     }else {
                 printf("Invalid command: %s\n", recvbuf);
             }
