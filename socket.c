@@ -68,7 +68,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
                   send(fd,reply,strlen(reply),0);
                 close(fd);
             }
-            else if (strncmp(recvbuf, "GET", 3) == 0) {
+           else if (strncmp(recvbuf, "GET", 3) == 0) {
                 
                 char* filename = strtok(recvbuf + 3, " ");
                 if (filename != NULL) {
@@ -85,7 +85,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
                         }
                         fclose(file);
                     }
-                    }else {
+                    else {
                 printf("Invalid command: %s\n", recvbuf);
             }
 
