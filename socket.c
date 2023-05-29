@@ -59,7 +59,13 @@ int  recvbuflen = DEFAULT_BUFLEN;
             printf("Bytes received: %d\n", rcnt);
             if (strncmp(recvbuf,"LIST",4) == 0) {
                 list_files(fd, path);
-            } else {
+            }
+            else if(strncmp(recvbuf,"QUIT",4)==0)
+            {
+                printf("You closed the server\n")
+                printf("....Goodbye....")
+                closed(fd);
+            }else {
                 printf("Invalid command: %s\n", recvbuf);
             }
 
