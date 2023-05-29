@@ -99,7 +99,7 @@ int  recvbuflen = DEFAULT_BUFLEN;
             close(fd);
             break;
         }
-    } 
+    } while (rcnt > 0);
 }
 
 
@@ -195,5 +195,4 @@ while(1) {  // main accept() loop
 
 // Final Cleanup
 close(server);
-
 }
