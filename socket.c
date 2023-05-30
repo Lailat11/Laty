@@ -81,6 +81,22 @@ char recvbuf[DEFAULT_BUFLEN];
         fclose(file);
     }
 }
+            else if(strncmp(recvbuf,"DEL",3)==0){
+            char suna[DEFAULT_BUFLEN];
+             sscanf(recvbuf,"DEL %s",suna);
+             char hanya[DEFAULT_BUFLEN];
+                snprintf(hanya,DEFAULT_BUFLEN,"%s/%s",path,suna);
+                if(remove(hanya)==0){
+                    char message[DEFAULT_BUFLEN];
+        snprintf(message, DEFAULT_BUFLEN, "%s deleted, suna);
+        send(fd, message, strlen(message), 0);
+                }
+                 else{
+                     char message1[DEFAULT_BUFLEN];
+        snprintf(message1, DEFAULT_BUFLEN, "%s could not be deleted, suna);
+        send(fd, message1, strlen(message1), 0);
+                 }
+            }
 
             else if(strncmp(recvbuf,"QUIT",4)==0)
             {
