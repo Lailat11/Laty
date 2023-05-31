@@ -178,6 +178,7 @@ pid_t pid;
               break;
           case 'u':
               users=optarg;
+              break;
           default:
               fprintf(stderr,"Please Enter port number using -p",argv[0]);
               return 1;
