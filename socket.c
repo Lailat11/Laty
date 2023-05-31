@@ -23,6 +23,8 @@ void write_to_file(const char* file_path, const char* content) {
 
     fputs(content, file);
     fclose(file);
+      char message[] = "200 OK: File written successfully\n";
+    send(client_fd, message, strlen(message), 0);
 }
 void list_files(int client_fd, const char* path) {
     DIR* dir;
