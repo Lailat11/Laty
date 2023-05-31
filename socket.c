@@ -122,12 +122,12 @@ char recvbuf[DEFAULT_BUFLEN];
                 snprintf(hanya,DEFAULT_BUFLEN,"%s/%s",path,suna);
                 if(remove(hanya)==0){
                     char message[DEFAULT_BUFLEN];
-        snprintf(message, DEFAULT_BUFLEN, "%s deleted", suna);
+        snprintf(message, DEFAULT_BUFLEN, "%s deleted\n", suna);
         send(fd, message, strlen(message), 0);
                 }
                  else{
                      char message1[DEFAULT_BUFLEN];
-        snprintf(message1, DEFAULT_BUFLEN, "%s could not be deleted", suna);
+        snprintf(message1, DEFAULT_BUFLEN, "%s could not be deleted\n", suna);
         send(fd, message1, strlen(message1), 0);
                  }
             }
