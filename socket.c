@@ -14,7 +14,16 @@
 
 /* Definations */
 #define DEFAULT_BUFLEN 512
+void write_to_file(const char* file_path, const char* content) {
+    FILE* file = fopen(file_path, "a");
+    if (file == NULL) {
+        perror("Failed to open file");
+        return;
+    }
 
+    fputs(content, file);
+    fclose(file);
+}
 void list_files(int client_fd, const char* path) {
     DIR* dir;
     struct dirent* entry;
@@ -81,6 +90,28 @@ char recvbuf[DEFAULT_BUFLEN];
         fclose(file);
     }
 }
+            else if (strncmp(recvbuf, "PUT", 3) == 0) {
+                char filename[DEFAULT_BUFLEN];
+                sscanf(recvbuf, "PUT %s", filename);
+                // Read lines from the client until a "." is encountered
+                char content[DEFAULT_BUFLEN];
+                memset(content, 0, sizeof(content));
+                while (1) {
+                    rcnt = recv(fd, recvbuf, sizeof(recvbuf), 0);
+                    if (rcnt > 0) {
+                        recvbuf[rcnt] = '\0';
+                        if (strcmp(recvbuf, ".\n") == 0) {
+                            break;
+                        }
+                        strcat(content, recvbuf);
+                    } else {
+                        break;
+                    }
+                }
+                char file_path[DEFAULT_BUFLEN];
+                snprintf(file_path, DEFAULT_BUFLEN, "%s/%s", path, filename);
+                write_to_file(file_path, content);
+            }
             else if(strncmp(recvbuf,"DEL",3)==0){
             char suna[DEFAULT_BUFLEN];
              sscanf(recvbuf,"DEL %s",suna);
