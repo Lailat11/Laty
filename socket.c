@@ -167,7 +167,8 @@ pid_t pid;
     int character;
     int PORT=0;
     char *path=NULL;
-    while((character=getopt(argc,argv,"d:p:"))!=-1){
+    char *users=NULL;
+    while((character=getopt(argc,argv,"d:p:u:"))!=-1){
       switch(character){
           case 'd':
               path=optarg;
@@ -175,6 +176,8 @@ pid_t pid;
           case 'p':
               PORT=atoi(optarg);
               break;
+          case 'u':
+              users=optarg;
           default:
               fprintf(stderr,"Please Enter port number using -p",argv[0]);
               return 1;
@@ -182,8 +185,8 @@ pid_t pid;
         
         
        }
-          if(path==NULL||PORT==0){
-              printf("Please Enter arguements using -d and -p \n");
+          if(path==NULL||users==NULL||port==0){
+              printf("Please Enter arguements using -d,-p and -u \n");
           return 1;
               
           }
