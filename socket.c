@@ -185,7 +185,7 @@ pid_t pid;
         
         
        }
-          if(path==NULL||users==NULL||port==0){
+          if(path==NULL||users==NULL||PORT==0){
               printf("Please Enter arguements using -d,-p and -u \n");
           return 1;
               
