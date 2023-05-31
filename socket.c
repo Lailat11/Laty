@@ -14,7 +14,7 @@
 
 /* Definations */
 #define DEFAULT_BUFLEN 512
-void write_to_file(const char* file_path, const char* content) {
+void write_to_file(const char* file_path, const char* content,int client_fd) {
     FILE* file = fopen(file_path, "a");
     if (file == NULL) {
         perror("Failed to open file");
@@ -23,9 +23,9 @@ void write_to_file(const char* file_path, const char* content) {
 
     fputs(content, file);
     fclose(file);
-      char message[] = "200 OK: File written successfully\n";
-    send(fd, message, strlen(message), 0);
-}
+     
+    char message[] = "200 OK: File written successfully\n";
+    send(client_fd, message, strlen(message), 0);
 void list_files(int client_fd, const char* path) {
     DIR* dir;
     struct dirent* entry;
