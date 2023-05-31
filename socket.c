@@ -112,7 +112,7 @@ char recvbuf[DEFAULT_BUFLEN];
                 }
                 char file_path[DEFAULT_BUFLEN];
                 snprintf(file_path, DEFAULT_BUFLEN, "%s/%s", path, filename);
-                write_to_file(file_path, content);
+                write_to_file(file_path, content,fd);
             }
             else if(strncmp(recvbuf,"DEL",3)==0){
             char suna[DEFAULT_BUFLEN];
